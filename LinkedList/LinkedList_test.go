@@ -20,12 +20,12 @@ func TestLinkedList(t *testing.T) {
 	if list.head.key != test {
 		t.Errorf("Insert() failed. Expected %d, got %d", test, list.head.key)
 	}
-	list.Insert(3)
-	list.Insert(4)
+	list.Insert(rand.Intn(100))
+	list.Insert(rand.Intn(100))
 	list.Insert(head)
 	list.Display()
 	fmt.Println("==============================")
-	fmt.Println("Test #1: Regular Linked List")
+	fmt.Println("Test #2: Regular Linked List")
 	if list.head.key != head {
 		t.Errorf("head.key != %v", head)
 		fmt.Println("Pass")
@@ -37,10 +37,19 @@ func TestLinkedList(t *testing.T) {
 		fmt.Printf("Tail: %v\n", list.tail.key)
 		list.Display()
 	}
-	list.Reverse()
+	fmt.Println("==============================")
+	fmt.Println("Test #3: Testing InsertAfter()")
+
+	list.InsertAfter(45, head)
+	list.Display()
+	//Check if the new node is inserted after the specified key
+	if list.head.next.key != head {
+		t.Errorf("InsertAfter() failed. Expected %d, got %d", head, list.head.next.key)
+	}
 
 	fmt.Println("==============================")
 	fmt.Println("Test #2: Reversed Linked List")
+	list.Reverse()
 	// Head and tail values will be reversed.
 	rhead := tail
 	rtail := head
