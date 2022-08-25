@@ -4,22 +4,27 @@ import (
 	"fmt"
 	"math/rand"
 	"testing"
+	"time"
 )
 
 func TestLinkedList(t *testing.T) {
+	rand.NewSource(time.Now().UnixNano())
 	list := &List{}
-	head := rand.Intn(100)
 	tail := rand.Intn(100)
-	list.Insert(head)
+	head := rand.Intn(100)
+	list.Insert(0)
+	list.Insert(1)
 	list.Insert(rand.Intn(100))
 	list.Insert(rand.Intn(100))
-	list.Insert(rand.Intn(100))
-	list.Insert(tail)
-
+	list.Insert(6)
+	list.Display()
 	fmt.Println("==============================")
 	fmt.Println("Test #1: Regular Linked List")
+	fmt.Println("Tail is ", list.tail.key)
+	fmt.Println("Tail", tail)
 	if list.head.key != head {
 		t.Errorf("head.key != %v", head)
+		fmt.Println("Pass")
 		if list.tail.key != tail {
 			t.Errorf("tail.key != %v", tail)
 		}
@@ -41,8 +46,8 @@ func TestLinkedList(t *testing.T) {
 		}
 		list.Display()
 	} else {
-		fmt.Printf("Head: %v\n", list.tail.key)
-		fmt.Printf("Tail: %v\n", list.head.key)
+		fmt.Printf("Head: %v\n", list.head.key)
+		fmt.Printf("Tail: %v\n", list.tail.key)
 		list.Display()
 	}
 	fmt.Println("==============================")
