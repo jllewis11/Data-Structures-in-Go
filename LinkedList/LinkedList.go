@@ -22,12 +22,9 @@ func (L *List) Insert(key interface{}) {
 		L.head.prev = list
 	}
 	L.head = list
-
-	l := L.head
-	for l.next != nil {
-		l = l.next
+	if L.tail == nil {
+		L.tail = list
 	}
-	L.tail = l
 }
 
 func (l *List) Display() {

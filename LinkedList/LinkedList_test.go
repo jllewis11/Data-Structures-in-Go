@@ -12,23 +12,26 @@ func TestLinkedList(t *testing.T) {
 	list := &List{}
 	tail := rand.Intn(100)
 	head := rand.Intn(100)
-	list.Insert(0)
-	list.Insert(1)
-	list.Insert(rand.Intn(100))
-	list.Insert(rand.Intn(100))
-	list.Insert(6)
+	test := rand.Intn(100)
+	list.Insert(tail)
+	list.Insert(test)
+	fmt.Println("==============================")
+	fmt.Println("Test #1: Testing Insert()")
+	if list.head.key != test {
+		t.Errorf("Insert() failed. Expected %d, got %d", test, list.head.key)
+	}
+	list.Insert(3)
+	list.Insert(4)
+	list.Insert(head)
 	list.Display()
 	fmt.Println("==============================")
 	fmt.Println("Test #1: Regular Linked List")
-	fmt.Println("Tail is ", list.tail.key)
-	fmt.Println("Tail", tail)
 	if list.head.key != head {
 		t.Errorf("head.key != %v", head)
 		fmt.Println("Pass")
 		if list.tail.key != tail {
 			t.Errorf("tail.key != %v", tail)
 		}
-
 	} else {
 		fmt.Printf("Head: %v\n", list.head.key)
 		fmt.Printf("Tail: %v\n", list.tail.key)
@@ -39,10 +42,12 @@ func TestLinkedList(t *testing.T) {
 	fmt.Println("==============================")
 	fmt.Println("Test #2: Reversed Linked List")
 	// Head and tail values will be reversed.
-	if list.head.key != head {
-		t.Errorf("head.key != %v", tail)
-		if list.tail.key != tail {
-			t.Errorf("tail.key != %v", head)
+	rhead := tail
+	rtail := head
+	if list.head.key != rhead {
+		t.Errorf("head.key != %v", rtail)
+		if list.tail.key != rtail {
+			t.Errorf("tail.key != %v", rhead)
 		}
 		list.Display()
 	} else {
