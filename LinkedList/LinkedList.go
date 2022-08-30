@@ -47,6 +47,8 @@ func (l *List) InsertAfter(key interface{}, newKey interface{}) {
 		}
 		curr = curr.next
 	}
+	//If the key is not found, insert at the end of the list.
+	l.Insert(newKey)
 }
 
 func (l *List) Display() {
