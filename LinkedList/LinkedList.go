@@ -13,7 +13,7 @@ type List struct {
 	tail *Node
 }
 
-func (L *List) Insert(key interface{}) {
+func (L *List) append(key interface{}) {
 	list := &Node{
 		next: L.head,
 		key:  key,
@@ -22,12 +22,50 @@ func (L *List) Insert(key interface{}) {
 		L.head.prev = list
 	}
 	L.head = list
-
-	l := L.head
-	for l.next != nil {
-		l = l.next
+	if L.tail == nil {
+		L.tail = list
 	}
-	L.tail = l
+}
+
+func (L *List) prepend(key interface{}) {
+	//If the list is not empty, insert at the beginning of the list.
+	if L.head != nil {
+		list := &Node{
+			next: L.head,
+			key:  key,
+		}
+		L.head.prev = list
+		L.head = list
+	} else {
+		L.head = &Node{
+			key: key,
+		}
+		L.tail = L.head
+	}
+}
+
+//Insert after a specific key interface{}
+func (l *List) InsertAfter(key interface{}, newKey interface{}) {
+	curr := l.head
+	for curr != nil {
+		if curr.key == key {
+			list := &Node{
+				prev: curr,
+				next: curr.next,
+				key:  newKey,
+			}
+			curr.next = list
+			if list.next != nil {
+				list.next.prev = list
+			} else {
+				l.tail = list
+			}
+			return
+		}
+		curr = curr.next
+	}
+	//If the key is not found, insert at the end of the list.
+	l.append(newKey)
 }
 
 func (l *List) Display() {
@@ -47,14 +85,6 @@ func Display(list *Node) {
 	fmt.Println()
 }
 
-func ShowBackwards(list *Node) {
-	for list != nil {
-		fmt.Printf("%v <-", list.key)
-		list = list.prev
-	}
-	fmt.Println()
-}
-
 func (l *List) Reverse() {
 	curr := l.head
 	var prev *Node
@@ -67,25 +97,4 @@ func (l *List) Reverse() {
 		curr = next
 	}
 	l.head = prev
-	Display(l.head)
-}
-
-func main() {
-	link := List{}
-	link.Insert(5)
-	link.Insert(9)
-	link.Insert(13)
-	link.Insert(22)
-	link.Insert(28)
-	link.Insert(36)
-
-	fmt.Println("\n==============================\n")
-	fmt.Printf("Head: %v\n", link.head.key)
-	fmt.Printf("Tail: %v\n", link.tail.key)
-	link.Display()
-	fmt.Println("\n==============================\n")
-	fmt.Printf("head: %v\n", link.head.key)
-	fmt.Printf("tail: %v\n", link.tail.key)
-	link.Reverse()
-	fmt.Println("\n==============================\n")
 }
