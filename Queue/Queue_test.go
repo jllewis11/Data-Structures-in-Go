@@ -32,12 +32,8 @@ func TestQueue(t *testing.T) {
 			t.Errorf("tail.key != %v", head)
 		}
 	} else {
-		fmt.Printf("Head: %v
-
-", queue.head.key)
-		fmt.Printf("Tail: %v
-
-", queue.tail.key)
+		fmt.Printf("Head: %v", queue.head.key)
+		fmt.Printf("Tail: %v", queue.tail.key)
 		queue.Display()
 	}
 	fmt.Println("==============================")
