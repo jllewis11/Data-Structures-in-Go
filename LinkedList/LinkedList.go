@@ -27,6 +27,9 @@ func (L *List) append(key interface{}) {
 	}
 }
 
+<<<<<<< HEAD
+// Insert after a specific key interface{}
+=======
 func (L *List) prepend(key interface{}) {
 	//If the list is not empty, insert at the beginning of the list.
 	if L.head != nil {
@@ -45,6 +48,7 @@ func (L *List) prepend(key interface{}) {
 }
 
 //Insert after a specific key interface{}
+>>>>>>> 0bd37a5ff4179e391bc946093bb37139e2a799ac
 func (l *List) InsertAfter(key interface{}, newKey interface{}) {
 	curr := l.head
 	for curr != nil {
