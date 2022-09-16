@@ -7,23 +7,32 @@ import (
 	"time"
 )
 
+//Append
+//InsertAfter
+//Reverse
+//Display
+//prepend
+
 func TestLinkedList(t *testing.T) {
 	rand.NewSource(time.Now().UnixNano())
 	list := &List{}
 	tail := rand.Intn(100)
 	head := rand.Intn(100)
 	test := rand.Intn(100)
-	list.Insert(tail)
-	list.Insert(test)
+	list.append(tail)
+	list.append(test)
+
 	fmt.Println("==============================")
-	fmt.Println("Test #1: Testing Insert()")
+	fmt.Println("Test #1: Testing append()")
 	if list.head.key != test {
-		t.Errorf("Insert() failed. Expected %d, got %d", test, list.head.key)
+		t.Errorf("append() failed. Expected %d, got %d", test, list.head.key)
 	}
-	list.Insert(rand.Intn(100))
-	list.Insert(rand.Intn(100))
-	list.Insert(head)
+
+	list.append(rand.Intn(100))
+	list.append(rand.Intn(100))
+	list.append(head)
 	list.Display()
+
 	fmt.Println("==============================")
 	fmt.Println("Test #2: Regular Linked List")
 	if list.head.key != head {
@@ -37,18 +46,40 @@ func TestLinkedList(t *testing.T) {
 		fmt.Printf("Tail: %v\n", list.tail.key)
 		list.Display()
 	}
-	fmt.Println("==============================")
-	fmt.Println("Test #3: Testing InsertAfter()")
 
-	list.InsertAfter(45, head)
+	fmt.Println("==============================")
+	fmt.Println("Test #3: Testing prepend()")
+
+	r1 := rand.Intn(100)
+	list.prepend(r1)
+
+	if list.head.key != r1 {
+		t.Errorf("prepend() failed. Expected %d, got %d", test, list.head.key)
+	}
+
+	fmt.Println("==============================")
+	fmt.Println("Test #4: Testing InsertAfter()")
+
+	rand1 := rand.Intn(100)
+	list.InsertAfter(r1, rand1)
 	list.Display()
 	//Check if the new node is inserted after the specified key
-	if list.head.next.key != head {
+	if list.head.next.key != rand1 {
+		t.Errorf("InsertAfter() failed. Expected %d, got %d", head, list.head.next.key)
+	}
+	fmt.Println("")
+	fmt.Println("Test #5: Testing InsertAfter() if key is not found")
+	rand2 := rand.Intn(100)
+	//If the key is not found, insert at the end of the list. 101 is not in the list.
+	list.InsertAfter(101, rand2)
+	list.Display()
+	//Check if the new node is inserted after the specified key
+	if list.tail.key == rand2 {
 		t.Errorf("InsertAfter() failed. Expected %d, got %d", head, list.head.next.key)
 	}
 
 	fmt.Println("==============================")
-	fmt.Println("Test #2: Reversed Linked List")
+	fmt.Println("Test #6: Reversed Linked List")
 	list.Reverse()
 	// Head and tail values will be reversed.
 	rhead := tail
@@ -64,5 +95,6 @@ func TestLinkedList(t *testing.T) {
 		fmt.Printf("Tail: %v\n", list.tail.key)
 		list.Display()
 	}
+
 	fmt.Println("==============================")
 }

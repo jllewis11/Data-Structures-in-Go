@@ -13,7 +13,7 @@ type List struct {
 	tail *Node
 }
 
-func (L *List) Insert(key interface{}) {
+func (L *List) append(key interface{}) {
 	list := &Node{
 		next: L.head,
 		key:  key,
@@ -27,7 +27,28 @@ func (L *List) Insert(key interface{}) {
 	}
 }
 
+<<<<<<< HEAD
 // Insert after a specific key interface{}
+=======
+func (L *List) prepend(key interface{}) {
+	//If the list is not empty, insert at the beginning of the list.
+	if L.head != nil {
+		list := &Node{
+			next: L.head,
+			key:  key,
+		}
+		L.head.prev = list
+		L.head = list
+	} else {
+		L.head = &Node{
+			key: key,
+		}
+		L.tail = L.head
+	}
+}
+
+//Insert after a specific key interface{}
+>>>>>>> 0bd37a5ff4179e391bc946093bb37139e2a799ac
 func (l *List) InsertAfter(key interface{}, newKey interface{}) {
 	curr := l.head
 	for curr != nil {
@@ -47,6 +68,8 @@ func (l *List) InsertAfter(key interface{}, newKey interface{}) {
 		}
 		curr = curr.next
 	}
+	//If the key is not found, insert at the end of the list.
+	l.append(newKey)
 }
 
 func (l *List) Display() {
@@ -62,14 +85,6 @@ func Display(list *Node) {
 	for list != nil {
 		fmt.Printf("%v ->", list.key)
 		list = list.next
-	}
-	fmt.Println()
-}
-
-func ShowBackwards(list *Node) {
-	for list != nil {
-		fmt.Printf("%v <-", list.key)
-		list = list.prev
 	}
 	fmt.Println()
 }
