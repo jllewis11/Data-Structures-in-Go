@@ -27,7 +27,7 @@ func (L *List) Insert(key interface{}) {
 	}
 }
 
-//Insert after a specific key interface{}
+// Insert after a specific key interface{}
 func (l *List) InsertAfter(key interface{}, newKey interface{}) {
 	curr := l.head
 	for curr != nil {
