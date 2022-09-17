@@ -102,3 +102,9 @@ func (l *List) Reverse() {
 	}
 	l.head = prev
 }
+
+func (l1 *List, l2 *List) Merge() {
+	l1.tail.next = l2.head
+	l2.head.prev = l1.tail
+	l1.tail = l2.tail
+}
