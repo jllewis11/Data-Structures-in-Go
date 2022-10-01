@@ -1,4 +1,4 @@
-package main
+package LinkedList
 
 import (
 	"fmt"
@@ -54,9 +54,9 @@ func TestLinkedList(t *testing.T) {
 	list.prepend(r1)
 
 	if list.head.key != r1 {
-		t.Errorf("prepend() failed. Expected %d, got %d", test, list.head.key)
+		t.Errorf("prepend() failed. Expected %d, got %d", r1, list.head.key)
 	}
-
+	list.Display()
 	fmt.Println("==============================")
 	fmt.Println("Test #4: Testing InsertAfter()")
 

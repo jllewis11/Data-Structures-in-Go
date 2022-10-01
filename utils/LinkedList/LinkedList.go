@@ -1,4 +1,4 @@
-package main
+package LinkedList
 
 import "fmt"
 
@@ -13,42 +13,34 @@ type List struct {
 	tail *Node
 }
 
-func (L *List) append(key interface{}) {
+func (l *List) append(key interface{}) {
 	list := &Node{
-		next: L.head,
+		next: l.head,
 		key:  key,
 	}
-	if L.head != nil {
-		L.head.prev = list
+	if l.head != nil {
+		l.head.prev = list
 	}
-	L.head = list
-	if L.tail == nil {
-		L.tail = list
+	l.head = list
+	if l.tail == nil {
+		l.tail = list
 	}
 }
 
-<<<<<<< HEAD
-// Insert after a specific key interface{}
-=======
-func (L *List) prepend(key interface{}) {
-	//If the list is not empty, insert at the beginning of the list.
-	if L.head != nil {
-		list := &Node{
-			next: L.head,
-			key:  key,
-		}
-		L.head.prev = list
-		L.head = list
+func (l *List) prepend(key interface{}) {
+	list := &Node{
+		next: l.head,
+		key:  key,
+	}
+	if l.head == nil {
+		l.head = list
+		l.tail = list
 	} else {
-		L.head = &Node{
-			key: key,
-		}
-		L.tail = L.head
+		list.next = l.head
+		l.head = list
 	}
 }
 
-//Insert after a specific key interface{}
->>>>>>> 0bd37a5ff4179e391bc946093bb37139e2a799ac
 func (l *List) InsertAfter(key interface{}, newKey interface{}) {
 	curr := l.head
 	for curr != nil {
@@ -68,7 +60,6 @@ func (l *List) InsertAfter(key interface{}, newKey interface{}) {
 		}
 		curr = curr.next
 	}
-	//If the key is not found, insert at the end of the list.
 	l.append(newKey)
 }
 

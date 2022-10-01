@@ -1,4 +1,4 @@
-package main
+package Queue
 
 type Node struct {
 	next *Node
@@ -28,4 +28,12 @@ func (q *Queue) pop() interface{} {
 	node := q.head
 	q.head = q.head.next
 	return node.key
+}
+
+func (q *Queue) Display() {
+	curr := q.head
+	for curr != nil {
+		println(curr.key)
+		curr = curr.next
+	}
 }
