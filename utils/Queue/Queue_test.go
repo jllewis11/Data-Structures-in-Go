@@ -20,8 +20,6 @@ func TestQueue(t *testing.T) {
 	if queue.head.key != test {
 		t.Errorf("push() failed. Expected %d, got %d", test, queue.head.key)
 	}
-	queue.push(rand.Intn(100))
-	queue.push(rand.Intn(100))
 	queue.push(head)
 	queue.Display()
 	fmt.Println("==============================")

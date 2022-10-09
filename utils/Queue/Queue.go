@@ -1,5 +1,7 @@
 package Queue
 
+import "fmt"
+
 type Node struct {
 	next *Node
 	key  interface{}
@@ -22,18 +24,14 @@ func (q *Queue) push(key interface{}) {
 }
 
 func (q *Queue) pop() interface{} {
-	if q.head == nil {
-		return nil
-	}
-	node := q.head
-	q.head = q.head.next
-	return node.key
+	key := q.head.key
+	q.head = q.tail
+	return key
 }
-
 func (q *Queue) Display() {
-	curr := q.head
-	for curr != nil {
-		println(curr.key)
-		curr = curr.next
+	node := q.head
+	for node != nil {
+		fmt.Println(node.key)
+		node = node.next
 	}
 }
